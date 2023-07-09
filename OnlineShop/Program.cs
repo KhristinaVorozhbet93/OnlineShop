@@ -9,8 +9,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICatalog, InMemoryCatalog>();
 builder.Services.AddSingleton<IClock, Clock>();
-builder.Services.AddSingleton<IEmailSender, MailKitSmptEmailSender>();
 //builder.Services.AddSingleton<IClock>(new FakeClock(new DateTime(2023, 7, 3)));
+builder.Services.AddScoped<IEmailSender, MailKitSmptEmailSender>();
+
 
 builder.Services.AddHostedService<AppStartedNotificatorService>();
 builder.Services.AddHostedService<SalesNotificatorBackgroundService>();

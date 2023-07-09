@@ -12,6 +12,7 @@ namespace OnlineShop.Services
         public async ValueTask DisposeAsync()
         {
             await _smtpClient.DisconnectAsync(true);
+            _smtpClient.Dispose();
         }
         private async Task EnsureConnectAndAuthenticateAsync()
         {
