@@ -15,6 +15,17 @@ namespace OnlineShop.Data
             return _products;
             throw new ArgumentNullException(nameof(_products));
         }
+        public Product GetProductById(Guid id)
+        {
+            for (int i = 0; i < _products.Count; i++)
+            {
+                if (_products[i].Id == id)
+                {
+                    return _products[i];
+                }
+            }
+            throw new ArgumentException($"Продукта с ID={id} не существует!");
+        }
         public void AddProduct(Product product)
         {
             ArgumentException.ThrowIfNullOrEmpty(nameof(product));
