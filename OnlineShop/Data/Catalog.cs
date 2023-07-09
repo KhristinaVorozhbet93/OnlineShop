@@ -20,6 +20,25 @@ namespace OnlineShop.Data
             ArgumentException.ThrowIfNullOrEmpty(nameof(product));
             _products.Add(product);
         }
+        public void UpdateProduct(Guid productId, Product newProduct)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(nameof(newProduct));
+            foreach (var product in _products)
+            {
+                if (product.Id == productId)
+                {
+                    product.Name = newProduct.Name;
+                    product.Price = newProduct.Price;
+                    product.ExpiredAt = newProduct.ExpiredAt;
+                    product.ProducedAt = newProduct.ProducedAt;
+                    product.Description = newProduct.Description;
+                }
+                else
+                {
+                    throw new ArgumentException($"Продукта с ID={productId} не существует!");
+                }
+            }
+        }
         public void DeleteProduct(Guid productId)
         {
             foreach (var product in _products)
