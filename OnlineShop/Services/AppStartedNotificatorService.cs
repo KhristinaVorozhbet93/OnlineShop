@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Interfaces;
 using System.Diagnostics;
 
-namespace OnlineShop.Data
+namespace OnlineShop.Services
 {
     public class AppStartedNotificatorService : BackgroundService
     {
