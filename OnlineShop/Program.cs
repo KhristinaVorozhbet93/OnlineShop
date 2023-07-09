@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
-Catalog catalog = new Catalog();
+InMemoryCatalog catalog = new InMemoryCatalog();
 
 //RPC
 app.MapGet("/get_products", GetProducts);
