@@ -11,6 +11,7 @@ app.MapGet("/get_product", GetProductById);
 app.MapPost("/add_product", AddProduct);
 app.MapPost("/delete_product", DeleteProduct);
 app.MapPost("/update_product", UpdateProduct);
+app.MapPost("/clear_products", ClearCatalog);
 
 //REST
 app.MapGet("/products", GetProducts);
@@ -40,4 +41,8 @@ void DeleteProduct(Guid productId)
 void UpdateProduct(Guid productId, Product newProduct)
 {
     catalog.UpdateProduct(productId, newProduct);
+}
+void ClearCatalog()
+{
+    catalog.ClearCatalog();
 }
