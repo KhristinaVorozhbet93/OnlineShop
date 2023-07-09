@@ -34,6 +34,7 @@ namespace OnlineShop.Services
                     await emailSender.SendEmailAsync(user.email, "Промоакции", "Список акций");
                     _logger.LogInformation($"Email send to {user.email} in {sw.ElapsedMilliseconds} ms");
                 }
+                await Task.Delay(TimeSpan.FromDays(1)); 
             }
         }
     }
