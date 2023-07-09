@@ -25,7 +25,10 @@ namespace OnlineShop.Data
             {
                 if (_products[i].Id == id)
                 {
-                    return _products[i];
+                    lock (_productsSyncObj)
+                    {
+                        return _products[i];
+                    }
                 }
             }
             throw new ArgumentException($"Продукта с ID={id} не существует!");
@@ -33,7 +36,10 @@ namespace OnlineShop.Data
         public void AddProduct(Product product)
         {
             ArgumentException.ThrowIfNullOrEmpty(nameof(product));
-            _products.Add(product);
+            lock (_productsSyncObj)
+            {
+                _products.Add(product);
+            }
         }
         public void UpdateProduct(Guid productId, Product newProduct)
         {
