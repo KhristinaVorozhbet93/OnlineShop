@@ -5,11 +5,20 @@ namespace OnlineShop.Data
     public class Catalog
     {
         private readonly List<Product> _products;
-        private object _productsSyncObj = new();
 
         public Catalog()
         {
             _products = GenerateProducts(10);
+        }
+        public List<Product> GetProducts()
+        {
+            return _products;
+            throw new ArgumentNullException(nameof(_products));
+        }
+        public void AddProduct(Product product)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(nameof(product));
+            _products.Add(product);
         }
         private static List<Product> GenerateProducts(int count)
         {
