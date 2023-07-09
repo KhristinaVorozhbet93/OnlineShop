@@ -20,6 +20,17 @@ namespace OnlineShop.Data
             ArgumentException.ThrowIfNullOrEmpty(nameof(product));
             _products.Add(product);
         }
+        public void DeleteProduct(Guid productId)
+        {
+            foreach (var product in _products)
+            {
+                if (product.Id == productId)
+                {
+                    _products.Remove(product);
+                }
+            }
+            ArgumentException.ThrowIfNullOrEmpty($"Продукта с ID={productId} не существует!");
+        }
         private static List<Product> GenerateProducts(int count)
         {
             var random = new Random();
