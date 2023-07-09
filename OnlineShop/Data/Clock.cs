@@ -1,6 +1,8 @@
-﻿namespace OnlineShop.Data
+﻿using OnlineShop.Interfaces;
+
+namespace OnlineShop.Data
 {
-    public class Clock
+    public class Clock : IClock
     {
         public DateTime GetDateTimeUtc()
         {
