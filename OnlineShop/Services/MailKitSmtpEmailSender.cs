@@ -5,8 +5,25 @@ using System.Net;
 
 namespace OnlineShop.Services
 {
-    public class MailKitSmptEmailSender : IEmailSender
+    public class MailKitSmptEmailSender : IEmailSender, IAsyncDisposable
     {
+        private readonly SmtpClient _smtpClient = new SmtpClient();
+
+        public async ValueTask DisposeAsync()
+        {
+            await _smtpClient.DisconnectAsync(true);
+        }
+        private async Task EnsureConnectAndAuthenticateAsync()
+        {
+            if (!_smtpClient.IsConnected)
+            {
+                await _smtpClient.ConnectAsync("smtp.beget.com", 25, false);
+            }
+            if (!_smtpClient.IsAuthenticated)
+            {
+                await _smtpClient.AuthenticateAsync("asp2023pv112@rodion-m.ru", "");
+            }
+        }
         public async Task SendEmailAsync(string recepientEmail, string subject, string message)
         {
             ArgumentNullException.ThrowIfNull(recepientEmail);
@@ -23,15 +40,8 @@ namespace OnlineShop.Services
                 Text = message
             };
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync("smtp.beget.com", 25, false);
-                await client.AuthenticateAsync("asp2023pv112@rodion-m.ru", "");
-                await client.SendAsync(emailMessage);
-
-                await client.DisconnectAsync(true);
-            }
+            await EnsureConnectAndAuthenticateAsync();
+            await _smtpClient.SendAsync(emailMessage);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using OnlineShop.Interfaces;
+﻿using OnlineShop.Interfaces;
 using System.Diagnostics;
 
 namespace OnlineShop.Services
