@@ -17,12 +17,12 @@ namespace OnlineShop.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            await using var scope = _serviceProvider.CreateAsyncScope();
+            var localServiceProvider = scope.ServiceProvider;
+            var emailSender = localServiceProvider.GetRequiredService<IEmailSender>();
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                await using var scope = _serviceProvider.CreateAsyncScope();
-                var localServiceProvider = scope.ServiceProvider;
-                var emailSender = localServiceProvider.GetRequiredService<IEmailSender>();
-
                 var users = new User[]
                 {
                 new ("ptykhina.khristi@mail.ru")
