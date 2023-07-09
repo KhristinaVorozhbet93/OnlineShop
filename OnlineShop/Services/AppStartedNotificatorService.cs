@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Interfaces;
 using System.Diagnostics;
 
-namespace OnlineShop.Services
+namespace OnlineShop.Data
 {
     public class AppStartedNotificatorService : BackgroundService
     {
@@ -22,7 +22,6 @@ namespace OnlineShop.Services
                 await _emailSender.SendEmailAsync("ptykhina.khristi@mail.ru", "Тест приложения", $"Использовано памяти: {memory} мегабайт");
                 await Task.Delay(TimeSpan.FromMinutes(1));
             }
-
         }
     }
 }
