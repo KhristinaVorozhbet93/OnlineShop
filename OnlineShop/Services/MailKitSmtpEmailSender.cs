@@ -1,10 +1,11 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
+using OnlineShop.Interfaces;
 using System.Net;
 
 namespace OnlineShop.Services
 {
-    public class MailKitSmptEmailSender
+    public class MailKitSmptEmailSender : IEmailSender
     {
         public async Task SendEmailAsync(string recepientEmail, string subject, string message)
         {

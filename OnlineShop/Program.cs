@@ -1,6 +1,7 @@
 using OnlineShop.Data;
 using OnlineShop.Interfaces;
 using OnlineShop.Models;
+using OnlineShop.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -8,6 +9,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICatalog, InMemoryCatalog>();
 builder.Services.AddSingleton<IClock, Clock>();
+builder.Services.AddSingleton<IEmailSender, MailKitSmptEmailSender>();
 //builder.Services.AddSingleton<IClock>(new FakeClock(new DateTime(2023, 7, 3)));
 
 var app = builder.Build();
