@@ -48,11 +48,14 @@ namespace OnlineShop.Data
             {
                 if (product.Id == productId)
                 {
-                    product.Name = newProduct.Name;
-                    product.Price = newProduct.Price;
-                    product.ExpiredAt = newProduct.ExpiredAt;
-                    product.ProducedAt = newProduct.ProducedAt;
-                    product.Description = newProduct.Description;
+                    lock (_productsSyncObj)
+                    {
+                        product.Name = newProduct.Name;
+                        product.Price = newProduct.Price;
+                        product.ExpiredAt = newProduct.ExpiredAt;
+                        product.ProducedAt = newProduct.ProducedAt;
+                        product.Description = newProduct.Description;
+                    }
                 }
                 else
                 {
