@@ -26,9 +26,10 @@ List<Product> GetProducts()
 {
     return catalog.GetProducts();
 }
-void AddProduct(Product product)
+IResult AddProduct(Product product)
 {
     catalog.AddProduct(product);
+    return Results.Created($"/products/{product.Id}", product);
 }
 Product GetProductById(Guid id)
 {
