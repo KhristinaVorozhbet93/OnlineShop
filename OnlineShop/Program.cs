@@ -1,9 +1,12 @@
 using OnlineShop.Data;
+using OnlineShop.Interfaces;
 using OnlineShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<ICatalog, InMemoryCatalog>();
 
 var app = builder.Build();
 app.UseSwagger();
