@@ -14,9 +14,15 @@ namespace OnlineShop.Data
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _emailSender.SendEmailAsync("ptykhina.khristi@mail.ru", "Тест приложения", "Приложение запущено");
+                var memory = 0.0;
+                using (Process proc = Process.GetCurrentProcess())
+                {
+                    memory = proc.PrivateMemorySize64 / (1024 * 1024);
+                }
+                await _emailSender.SendEmailAsync("ptykhina.khristi@mail.ru", "Тест приложения", $"Использовано памяти: {memory} мегабайт");
                 await Task.Delay(TimeSpan.FromMinutes(1));
             }
+
         }
     }
 }
