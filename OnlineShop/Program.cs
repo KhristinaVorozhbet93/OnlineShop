@@ -2,7 +2,12 @@ using OnlineShop.Data;
 using OnlineShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 Catalog catalog = new Catalog();
 
 //RPC
