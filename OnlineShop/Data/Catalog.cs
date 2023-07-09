@@ -66,14 +66,20 @@ namespace OnlineShop.Data
             {
                 if (product.Id == productId)
                 {
-                    _products.Remove(product);
+                    lock (_productsSyncObj)
+                    {
+                        _products.Remove(product);
+                    }
                 }
             }
             ArgumentException.ThrowIfNullOrEmpty($"Продукта с ID={productId} не существует!");
         }
         public void ClearCatalog()
         {
-            _products.Clear();
+            lock (_productsSyncObj)
+            {
+                _products.Clear();
+            }
         }
         private static List<Product> GenerateProducts(int count)
         {
