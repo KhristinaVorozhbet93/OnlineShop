@@ -5,6 +5,7 @@ namespace OnlineShop.Data
     public class Catalog
     {
         private readonly List<Product> _products;
+        private object _productsSyncObj = new();
 
         public Catalog()
         {
@@ -12,7 +13,10 @@ namespace OnlineShop.Data
         }
         public List<Product> GetProducts()
         {
-            return _products;
+            lock (_productsSyncObj)
+            {
+                return _products;
+            }     
             throw new ArgumentNullException(nameof(_products));
         }
         public Product GetProductById(Guid id)
