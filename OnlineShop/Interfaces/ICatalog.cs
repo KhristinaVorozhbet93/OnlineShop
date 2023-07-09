@@ -4,15 +4,13 @@ namespace OnlineShop.Interfaces
 {
     public interface ICatalog
     {
-        public interface ICatalog
-        {
-            List<Product> GetProducts(IClock clock);
-            Product GetProductById(Guid id, IClock clock);
-            void AddProduct(Product product);
-            void DeleteProduct(Guid productId);
-            void UpdateProduct(Guid productId, Product newProduct);
-            void ClearCatalog();
+        List<Product> GetProducts(IClock clock);
+        Product GetProductById(Guid id, IClock clock);
+        void AddProduct(Product product);
+        void DeleteProduct(Guid productId);
+        void UpdateProduct(Guid productId, Product newProduct);
+        void ClearCatalog();
 
-        }
     }
+
 }
