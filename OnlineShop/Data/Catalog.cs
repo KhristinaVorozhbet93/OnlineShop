@@ -61,6 +61,10 @@ namespace OnlineShop.Data
             }
             ArgumentException.ThrowIfNullOrEmpty($"Продукта с ID={productId} не существует!");
         }
+        public void ClearCatalog()
+        {
+            _products.Clear();
+        }
         private static List<Product> GenerateProducts(int count)
         {
             var random = new Random();
