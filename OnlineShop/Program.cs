@@ -11,7 +11,6 @@ builder.Services.AddSingleton<ICatalog, InMemoryCatalog>();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
-InMemoryCatalog catalog = new InMemoryCatalog();
 
 //RPC
 app.MapGet("/get_products", GetProducts);
@@ -30,28 +29,29 @@ app.MapPut("/products/{productId}", UpdateProduct);
 
 app.Run();
 
-List<Product> GetProducts()
+List<Product> GetProducts(ICatalog catalog, IClock clock)
 {
-    return catalog.GetProducts();
+    return catalog.GetProducts(clock);
 }
-IResult AddProduct(Product product)
+Product GetProductById(Guid id, ICatalog catalog, IClock clock)
+{
+    return catalog.GetProductById(id, clock);
+}
+IResult AddProduct(Product product, ICatalog catalog)
 {
     catalog.AddProduct(product);
     return Results.Created($"/products/{product.Id}", product);
 }
-Product GetProductById(Guid id)
-{
-    return catalog.GetProductById(id);
-}
-void DeleteProduct(Guid productId)
+void DeleteProduct(Guid productId, ICatalog catalog)
 {
     catalog.DeleteProduct(productId);
 }
-void UpdateProduct(Guid productId, Product newProduct)
+void UpdateProduct(Guid productId, Product newProduct, ICatalog catalog)
 {
     catalog.UpdateProduct(productId, newProduct);
 }
-void ClearCatalog()
+void ClearCatalog(ICatalog catalog)
 {
     catalog.ClearCatalog();
 }
+
