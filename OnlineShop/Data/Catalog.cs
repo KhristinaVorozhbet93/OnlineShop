@@ -2,12 +2,12 @@
 
 namespace OnlineShop.Data
 {
-    public class Catalogcs
+    public class Catalog
     {
         private readonly List<Product> _products;
         private object _productsSyncObj = new();
 
-        public InMemoryCatalog()
+        public Catalog()
         {
             _products = GenerateProducts(10);
         }
