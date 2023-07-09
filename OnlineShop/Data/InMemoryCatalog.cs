@@ -1,8 +1,9 @@
-﻿using OnlineShop.Models;
+﻿using OnlineShop.Interfaces;
+using OnlineShop.Models;
 
 namespace OnlineShop.Data
 {
-    public class InMemoryCatalog
+    public class InMemoryCatalog : ICatalog
     {
         private readonly List<Product> _products;
         private object _productsSyncObj = new();
