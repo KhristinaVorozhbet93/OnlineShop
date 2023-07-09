@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Interfaces;
+using System.Diagnostics;
 
 namespace OnlineShop.Data
 {
@@ -13,8 +14,8 @@ namespace OnlineShop.Data
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromMinutes(1)); 
                 await _emailSender.SendEmailAsync("ptykhina.khristi@mail.ru", "Тест приложения", "Приложение запущено");
+                await Task.Delay(TimeSpan.FromMinutes(1));
             }
         }
     }
