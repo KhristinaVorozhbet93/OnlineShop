@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICatalog, InMemoryCatalog>();
+builder.Services.AddSingleton<IClock, Clock>();
 
 var app = builder.Build();
 app.UseSwagger();
